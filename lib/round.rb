@@ -3,6 +3,8 @@ class Round
   attr_reader :deck,
               :guesses
 
+
+
   def initialize(deck)
     @deck = deck
     @guesses = []
@@ -10,14 +12,17 @@ class Round
   end
 
   def current_card
-    current_card = deck.cards[@current_card_index]
-    # binding.pry
+    deck.cards[@current_card_index]
   end
 
-  def record_guess(guesses)
-    
+  def record_guess(response)
+    @guesses << Guess.new(response, current_card)
+    @guesses.last
   end
 
+  def count
+
+  end
 
 
 end
