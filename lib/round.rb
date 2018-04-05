@@ -15,14 +15,22 @@ class Round
     deck.cards[@current_card_index]
   end
 
-  def record_guess(response)
+  def record_guess(response, deck)
     @guesses << Guess.new(response, current_card)
     @guesses.last
   end
 
-  def count
+  def feedback
 
   end
+  #
+  # def number_correct
+  #
+  # end
+  #
+  # def percent_correct
+  #
+  # end
 
 
 end

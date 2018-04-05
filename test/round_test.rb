@@ -13,7 +13,7 @@ class RoundTest < Minitest::Test
     deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
 
-    assert_equal deck, round.deck
+    assert_instance_of Deck, deck
   end
 
   def test_each_round_has_guesses
@@ -47,7 +47,8 @@ class RoundTest < Minitest::Test
     round = Round.new(deck)
     guess = Guess.new("Juneau", card_1)
 
-    assert_equal guess, round.record_guess("Juneau")
+    assert_instance_of Guess, guess
+    assert_equal "Juneau", guess.response
   end
 
   def test_count_guesses
@@ -59,8 +60,26 @@ class RoundTest < Minitest::Test
     deck = Deck.new([card_1, card_2])
     round = Round.new(deck)
 
+    response = "response"
+    guess = Guess.new(response, card_1)
+    round.record_guess(response, deck)
+
     assert_equal 1, round.guesses.count
+
   end
+
+def test_feedback
+  card_1 = Card.new("What is the capital of Alaska?", "Juneau")
+  deck = Deck.new([card_1])
+  round = Round.new(deck)
+
+  response = "Juneau"
+  guess = Guess.new(response, card_1)
+  round.guesses << guess
+
+  assert_equal "Correct!", round.guesses.first.feedback
+end
+
 
 end
 
